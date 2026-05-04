@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base_datos.conexion import Base
+from backend.base_datos.conexion import Base
 
 
 class Venta(Base):

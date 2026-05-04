@@ -1,5 +1,5 @@
-from base_datos.conexion import SessionLocal
-from modelos.producto import Producto
+from backend.base_datos.conexion import SessionLocal
+from backend.modelos.producto import Producto
 
 def crear_producto(nombre, categoria, precio, stock, stock_minimo=5):
     session = SessionLocal()
@@ -72,7 +72,7 @@ def eliminar_producto(id_producto):
 
     return True
 
-from modelos.usuario import Usuario
+from backend.modelos.usuario import Usuario
 
 
 def crear_usuario(nombre_usuario, password, rol):
@@ -104,7 +104,7 @@ def buscar_usuario(nombre_usuario):
 
     return usuario
 
-from modelos.venta import Venta
+from backend.modelos.venta import Venta
 
 
 def crear_venta(usuario_id, total):
@@ -122,7 +122,7 @@ def crear_venta(usuario_id, total):
 
     return venta
 
-from modelos.proveedor import Proveedor
+from backend.modelos.proveedor import Proveedor
 
 
 def crear_proveedor(nombre, telefono, email, direccion):

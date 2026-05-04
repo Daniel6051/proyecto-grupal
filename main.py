@@ -9,50 +9,38 @@ Flujo de arranque:
 """
 
 import tkinter as tk
-from base_datos.conexion import crear_base_datos
-import modelos.producto
-import modelos.usuario
-import modelos.venta
-import modelos.proveedor
+
+from backend.base_datos.conexion import crear_base_datos
+import backend.modelos.producto
+import backend.modelos.usuario
+import backend.modelos.venta
+import backend.modelos.proveedor
 
 from interfaz.login import VentanaLogin
 from interfaz.ventana_principal import VentanaPrincipal
 
 
 def main():
-    # ── 1. Inicializar base de datos ──────────────────────────────────
     crear_base_datos()
-
-    # Crear un usuario de prueba si no existe (solo para desarrollo)
     _crear_usuario_demo()
 
-    # ── 2. Ventana raíz oculta (necesaria para el Toplevel del login) ─
     root = tk.Tk()
-    root.withdraw()  # ocultamos la raíz mientras está el login
+    root.withdraw()
 
-    # ── 3. Pantalla de login ──────────────────────────────────────────
     login = VentanaLogin(root)
-    root.wait_window(login)  # espera a que el login se cierre
+    root.wait_window(login)
 
-    # ── 4. Verificar autenticación ────────────────────────────────────
     if login.usuario_autenticado is None:
-        # El usuario cerró el login sin autenticarse
         root.destroy()
         return
 
-    # ── 5. Abrir ventana principal ────────────────────────────────────
-    root.destroy()  # destruimos la raíz temporal
+    root.destroy()
     app = VentanaPrincipal(login.usuario_autenticado)
     app.mainloop()
 
 
 def _crear_usuario_demo():
-    """
-    Crea un usuario administrador de prueba si la tabla está vacía.
-    Contraseña: admin123 (guardada en texto plano para desarrollo).
-    En producción reemplazar por un hash bcrypt.
-    """
-    from base_datos.repositorios import buscar_usuario, crear_usuario
+    from backend.base_datos.repositorios import buscar_usuario, crear_usuario
 
     if buscar_usuario("admin") is None:
         crear_usuario("admin", "admin123", "administrador")

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean
 
-from base_datos.conexion import Base
+from backend.base_datos.conexion import Base
 
 
 class Proveedor(Base):
