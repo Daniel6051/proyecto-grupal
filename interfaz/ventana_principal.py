@@ -175,8 +175,16 @@ class VentanaPrincipal(tk.Tk):
         VentanaAlertas(self)
 
     def _abrir_reportes(self):
-        from interfaz.ventana_reportes import VentanaReportes
-        VentanaReportes(self)
+        try:
+            from interfaz.ventana_reportes import VentanaReportes
+            VentanaReportes(self)
+        except Exception as e:
+            import traceback
+            messagebox.showerror(
+                "Error al abrir Reportes",
+                f"{type(e).__name__}: {e}\n\n{traceback.format_exc()}",
+                parent=self,
+            )
 
     def _salir(self):
         if messagebox.askyesno("Salir", "¿Desea cerrar el sistema?", parent=self):
