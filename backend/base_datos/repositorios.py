@@ -122,6 +122,14 @@ def crear_venta(usuario_id, total):
 
     return venta
 
+
+def listar_ventas():
+    session = SessionLocal()
+    ventas = session.query(Venta).all()
+    session.close()
+    return ventas
+
+
 from backend.modelos.proveedor import Proveedor
 
 

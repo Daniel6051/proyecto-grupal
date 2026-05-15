@@ -175,11 +175,8 @@ class VentanaPrincipal(tk.Tk):
         VentanaAlertas(self)
 
     def _abrir_reportes(self):
-        messagebox.showinfo(
-            "Reportes",
-            "El módulo de reportes será implementado por el Subgrupo C.",
-            parent=self,
-        )
+        from interfaz.ventana_reportes import VentanaReportes
+        VentanaReportes(self)
 
     def _salir(self):
         if messagebox.askyesno("Salir", "¿Desea cerrar el sistema?", parent=self):
